@@ -1,0 +1,9 @@
+#app,
+.home,
+.el-container{
+    height: 100%;
+}
+.el-header{
+    background: linear-gradient(135deg,#4c67ff,#5635df);
+    color:white;
+  }

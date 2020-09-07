@@ -1,0 +1,10 @@
+/*全局的样式 */
+html,body{
+    height: 100%;
+  }
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+a{text-decoration: none;}
+img{display: block;}
+img{border:0;display: block;} 
+table{border-collapse:collapse;border-spacing:0}

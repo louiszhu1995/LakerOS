@@ -1,0 +1,129 @@
+<template>
+<div id="app">
+  <div class="bg">
+    <div class="left"></div>
+    <div class="about">
+      <div class="h3">英雄管理系统</div>
+        <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
+          <el-form-item label="用户名" prop="username" >
+            <el-input type="text" class="input-name" v-model="loginForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input type="password" class="input-name" v-model="loginForm.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
+          </el-form-item>
+        </el-form>
+    </div>
+    <video src="../../assets/images/bg_video.d2d602a9.mp4" muted="muted" autoplay="autoplay"
+    loop="loop" preload="auto" class="video"></video>
+  </div>
+  </div>
+  
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        loginForm: {
+          username: '',
+          password: ''
+        },
+        rules: {
+          username: [
+            { validator: this.validateUsername, trigger: 'blur' }
+          ],
+          password: [
+            { validator: this.validatePassword, trigger: 'blur' }
+          ]
+        }
+      };
+    },
+    methods: {
+      // 校验用户名的函数
+      validateUsername(rule, value, callback){
+          if(value){
+            callback()
+          }else{
+            callback(new Error("请输入用户名"))
+          }
+      },
+      //校验密码的函数 
+      validatePassword (rule, value, callback){
+        // 8-18位密码必须由字母、数字组成，区分大小写 
+        let partrn = /^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]{8,18}$/
+        if(partrn.test(value)){
+            callback()
+          }else{
+            callback(new Error("8-18位字母、数字，区分大小写"))
+          }
+      },
+      //提交按钮触发的事件函数
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          // 本地校验通过，valid为true,反之为false
+          if (valid) {
+            alert('登陆成功!');
+          } else {
+            console.log('登陆失败!!');
+            return false;
+          }
+        });
+      }
+    }
+  }
+</script>
+<style>
+.bg{
+  width: 100%;
+  height: 100%;
+  background-image:url("../../assets/images/bg.824f963d.jpg");
+  overflow: hidden;
+  position: relative;
+}
+.left{
+  width: 50%;
+  height: 100%;
+  background-image: url("../../assets/images/bg2.fc58c850.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  opacity: .7;
+  background-position: 60% 65%;
+  position: absolute;
+}
+.vodeo{
+  position: absolute;
+}
+.about{
+  position: absolute;
+  left: 60%;
+  top: 15%;
+  width: 400px;
+  height: 500px;
+  background: rgba(0,0,0,.3);
+  border-radius: 10px;
+  z-index: 9;
+}
+  .h3{
+    text-align: center;
+    color:white;
+    font:32px/100px "";
+    font-weight: bold;
+    padding-top: 80px;
+    padding-bottom: 20px
+  }
+  .input-name{
+    width: 250px;
+  }
+  .el-form-item__label{
+    color: white;
+  }
+  .el-button--primary{
+    width: 250px;
+    background: linear-gradient(90deg,#1596fb,#002dff)
+  }
+  .el-input__inner{
+      background: transparent;
+  }
+</style>
