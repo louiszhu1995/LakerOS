@@ -1,3 +1,3 @@
 <template>
-    <h2>学生管理页</h2>
+        <router-view></router-view>
 </template>

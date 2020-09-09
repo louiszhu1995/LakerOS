@@ -16,12 +16,24 @@ const routes = [
         //懒加载方式：
         component:()=>import(/* webpackChunkName:"welcome" */ "../pages/Home/Welcome")
       },
-      // {
-      //   path:"StudentManager",
-      //   name:"/StudentItem",
-      //   //懒加载方式：
-      //   component:()=>import(/* webpackChunkName:"studentManager/studentItem" */ "../pages/Home/StudentManager/StudentItem")
-      // },
+      {
+        path:"StudentDormitory",
+        name:"StudentDormitory",
+        //懒加载方式：
+        component:()=>import(/* webpackChunkName:"studentManager/studentDormitory" */ "../pages/Home/StudentManager/StudentDormitory")
+      },
+      {
+        path:"StudentItem",
+        name:"StudentItem",
+        //懒加载方式：
+        component:()=>import(/* webpackChunkName:"studentManager/studentItem" */ "../pages/Home/StudentManager/StudentItem")
+      },
+      {
+        path:"StudentInformation",
+        name:"StudentInformation",
+        //懒加载方式：
+        component:()=>import(/* webpackChunkName:"studentManager/studentInformation" */ "../pages/Home/StudentManager/StudentInformation")
+      },
       {
         path:"Attendance",
         name:"Attendance",

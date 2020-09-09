@@ -23,6 +23,8 @@
   
 </template>
 <script>
+  import { login } from "@/api";
+
   export default {
     data() {
       return {
@@ -43,7 +45,7 @@
     methods: {
       // 校验用户名的函数
       validateUsername(rule, value, callback){
-          if(value){
+          if(value !== ""){
             callback()
           }else{
             callback(new Error("请输入用户名"))
@@ -51,25 +53,64 @@
       },
       //校验密码的函数 
       validatePassword (rule, value, callback){
-        // 8-18位密码必须由字母、数字组成，区分大小写 
-        let partrn = /^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]{8,18}$/
-        if(partrn.test(value)){
+         if(value !== ""){
             callback()
           }else{
-            callback(new Error("8-18位字母、数字，区分大小写"))
+            callback(new Error("请输入用密码"))
           }
+        // 8-18位密码必须由字母、数字组成，区分大小写 
+        // let partrn = /^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]{8,18}$/
+        // if(partrn.test(value)){
+        //     callback()
+        //   }else{
+        //     callback(new Error("8-18位字母、数字，区分大小写"))
+        //   }
       },
       //提交按钮触发的事件函数
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           // 本地校验通过，valid为true,反之为false
           if (valid) {
-            alert('登陆成功!');
+            // 打开加载动画
+             const loading = this.$loading({
+              lock: true,
+              text: 'Loading',
+              spinner: 'el-icon-loading',
+              background: 'rgba(0, 0, 0, 0.7)'
+            });
+            // 本地校验通过，发送登录进页面请求
+            let {username,password} = this.loginForm
+            login({username,password})
+            .then(res=>{
+              // console.log(res);
+              if(res.data.state){//请求成功了
+                let {token} = res.data
+                // 将token存到localstorage里
+                localStorage.setItem("lol-token",token)
+                // 将用户信息存到vuex中
+                this.$store.commit("SET_USERINFO",res.data.userInfo)
+                localStorage.setItem("userInfo",JSON.stringify(res.data.userInfo))
+                 this.$message({
+                  showClose: true,
+                  message: '登陆成功，正在跳转',
+                  type: 'success',
+                  center:true,
+                  duration:1000
+                });
+                // 跳转到主页
+                this.$router.push("/")
+                loading.close()// 关闭动画
+              }else{
+                 this.$message.error('用户名或密码错误');
+                loading.close()//关闭动画
+              }
+            })
+            // 请求失败的操作
           } else {
-            console.log('登陆失败!!');
-            return false;
-          }
-        });
+              console.log('登陆失败!!');
+              return false;
+        }
+      });
       }
     }
   }
@@ -125,5 +166,6 @@
   }
   .el-input__inner{
       background: transparent;
+      color: white;
   }
 </style>

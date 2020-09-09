@@ -15,9 +15,18 @@
               <i class="el-icon-edit"></i>
               <span slot="title">学员管理</span>
             </template>
-              <el-menu-item index="/StudentManger/StudentItem">学员项目管理</el-menu-item>
-             <el-menu-item index="/StudentManger/StudentInformation">学员资料</el-menu-item>
-             <el-menu-item index="/StudentManger/StudentDormitory">学员宿舍</el-menu-item>
+              <el-menu-item index="/StudentItem">
+                <i class="el-icon-folder-opened"></i>
+                <span slot="title">学员项目</span>
+              </el-menu-item>
+              <el-menu-item index="/StudentItem">
+                <i class="el-icon-notebook-2"></i>
+                <span slot="title">学员资料</span>
+              </el-menu-item>
+              <el-menu-item index="/StudentItem">
+                <i class="el-icon-office-building"></i>
+                <span slot="title">学员宿舍</span>
+              </el-menu-item>
           </el-submenu>
           <el-menu-item index="/Attendance">
             <i class="el-icon-notebook-1"></i>
@@ -36,10 +45,22 @@
       <el-container>
         <!-- 头部部分 -->
         <el-header>
+          <!-- 左侧部分 -->
+          <!-- 中间部分 -->
+          <!-- 右侧部分 -->
           <el-row type="flex" class="row-bg" justify="space-between">
             <el-col :span="6"><div class="grid-content">左</div></el-col>
             <el-col :span="6"><div class="grid-content">英雄管理系统</div></el-col>
-            <el-col :span="6"><div class="grid-content"></div>右</el-col>
+            <el-col :span="6">
+              <div class="grid-content right">
+                <div class="header">
+                  <el-avatar :size="40" fit="fit" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2818263918,1469537934&fm=26&gp=0.jpg"></el-avatar>
+                </div>
+                <div class="welcome"><span>欢迎您:</span></div>
+                <div class="signer"><span>{{$store.state.userInfo.nickname}}</span></div>
+                <div class="quit"><span @click="quit">退出</span></div>
+              </div>
+            </el-col>
           </el-row>
         </el-header>
         <!-- 主体部分 -->
@@ -52,8 +73,27 @@
   </div>
 </template>
 <script>
+// import subMenu from "../../components/subMenu"
+import {getLoginLog} from "@/api";
 export default {
- 
+    // data(){
+    //   return {
+    //     userInfo:
+    //   }
+    // },
+      mounted(){
+        getLoginLog()
+        .then(res=>{
+          console.log(res);
+        })
+      },
+      methods: {
+        quit(){
+          console.log(111);
+          localStorage.removeItem("lol-token");
+          this.$router.push("/login")
+        }
+      }
 };
 </script>
 <style>
@@ -65,7 +105,7 @@ export default {
   /* 头部样式 */
   .el-col {
     border-radius: 4px;
-    line-height: 20px;
+    line-height: 60px;
   }
   .bg-purple-dark {
     background: #99a9bf;
@@ -73,23 +113,38 @@ export default {
   .grid-content {
     border-radius: 4px;
   }
-  .row-bg {
-    padding: 10px 0;
+  /* 头部右边 */
+  .right{
+    display: flex;
+    justify-content:center;
+  }
+  .right span{
+    margin-left: 10px;
+  }
+  .right span:first-child{
     margin-top: 10px;
   }
+  .quit{
+    text-decoration: underline;
+    cursor: pointer;
+    color:cyan;
+  }
+  .signer{font-weight: bolder;color:tomato;}
+  .el-menu .el-menu-item{padding:0;}
+  .el-menu-vertical-demo li{text-align: left;}
+  /* .el-submenu{padding: 0;} */
   /* 大体布局 */
-  .el-header, .el-footer {
+  .el-header {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
-    line-height: 60px;
+    height: 60px;
   }
   .el-aside {
     background-color: #D3DCE6;
     color: #333;
     text-align: center;
   }
-  
   .el-main {
     background-color: #E9EEF3;
     color: #333;
