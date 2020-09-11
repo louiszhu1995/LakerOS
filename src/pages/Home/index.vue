@@ -5,41 +5,13 @@
       <el-aside width="200">
         <!-- logo位置 -->
         <h1 class="logo" style="height:60px;">logo</h1>
-        <el-menu  class="el-menu-vertical-demo"  :collapse="false" :router="true">
-          <el-menu-item index="/Welcome">
-            <i class="el-icon-menu"></i>
-            <span slot="title">管理首页</span>
-          </el-menu-item>
-          <el-submenu index="/StudentManger">
-            <template slot="title">
-              <i class="el-icon-edit"></i>
-              <span slot="title">学员管理</span>
-            </template>
-              <el-menu-item index="/StudentItem">
-                <i class="el-icon-folder-opened"></i>
-                <span slot="title">学员项目</span>
-              </el-menu-item>
-              <el-menu-item index="/StudentItem">
-                <i class="el-icon-notebook-2"></i>
-                <span slot="title">学员资料</span>
-              </el-menu-item>
-              <el-menu-item index="/StudentItem">
-                <i class="el-icon-office-building"></i>
-                <span slot="title">学员宿舍</span>
-              </el-menu-item>
-          </el-submenu>
-          <el-menu-item index="/Attendance">
-            <i class="el-icon-notebook-1"></i>
-            <span slot="title">考勤管理</span>
-          </el-menu-item>
-          <el-menu-item index="/Statistics">
-            <i class="el-icon-s-data"></i>
-            <span slot="title">数据统计</span>
-          </el-menu-item>
-          <el-menu-item index="/Mine">
-            <i class="el-icon-s-custom"></i>
-            <span slot="title">我的中心</span>
-          </el-menu-item>
+        <el-menu  class="el-menu-vertical-demo"  
+                  :collapse="isCollapse"
+                  :default-active="$route.path"
+                  text-color="#4e5bf8"
+                  ref="sideMenu"
+                  active-text-color="#E47833">
+            <subMenu :sideMenu="$store.state.sideMenu"></subMenu>
         </el-menu>
       </el-aside>
       <el-container>
@@ -73,24 +45,21 @@
   </div>
 </template>
 <script>
-// import subMenu from "../../components/subMenu"
-import {getLoginLog} from "@/api";
+import subMenu from "../../components/subMenu"
 export default {
-    // data(){
-    //   return {
-    //     userInfo:
-    //   }
-    // },
-      mounted(){
-        getLoginLog()
-        .then(res=>{
-          console.log(res);
-        })
+      data(){
+          return {
+              isCollapse:false
+          }
+      },
+      components: {
+        subMenu
       },
       methods: {
         quit(){
-          console.log(111);
           localStorage.removeItem("lol-token");
+          // 退出时刷新页面
+          window.location.reload()
           this.$router.push("/login")
         }
       }
@@ -132,7 +101,6 @@ export default {
   .signer{font-weight: bolder;color:tomato;}
   .el-menu .el-menu-item{padding:0;}
   .el-menu-vertical-demo li{text-align: left;}
-  /* .el-submenu{padding: 0;} */
   /* 大体布局 */
   .el-header {
     background-color: #B3C0D1;
@@ -150,6 +118,7 @@ export default {
     color: #333;
     text-align: center;
     line-height: 160px;
+    background-color:white;
   }
   
   body > .el-container {
@@ -160,7 +129,6 @@ export default {
   .el-container:nth-child(6) .el-aside {
     line-height: 260px;
   }
-  
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }

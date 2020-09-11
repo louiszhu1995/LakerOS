@@ -1,10 +1,56 @@
-/*全局的样式 */
-html,body{
-    height: 100%;
-  }
-*{margin: 0;padding: 0;}
-li{list-style: none;}
-a{text-decoration: none;}
-img{display: block;}
-img{border:0;display: block;} 
-table{border-collapse:collapse;border-spacing:0}
+/* 全局样式 清除一些默认样式 */
+
+input {
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.clearfix {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* 设定容器高度占满100% */
+
+#app, .home, .home .el-container {
+  height: 100%;
+}
+
+/* 更改submenu的样式 */
+
+.el-menu--collapse .el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
+}
+
+.el-menu--collapse .el-menu-item .el-submenu__icon-arrow, .el-menu--collapse .el-submenu .el-submenu__title .el-submenu__icon-arrow {
+  display: none;
+}
+
+.el-menu-item-group .el-menu-item {
+  padding: 0 0 0 30px;
+}
+
+.el-menu-item-group .el-menu-item-group__title {
+  padding: 0
+}
+
+.search .el-input__inner {
+  width: 300px;
+  margin-right:5px;
+}

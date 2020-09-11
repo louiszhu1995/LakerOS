@@ -32,16 +32,16 @@ axios.create({
 // config就是被拦截器拦截掉的请求配置
 axios.interceptors.request.use(config=>{
     // 登录是不需要拦截的
-    // if(config.url === "/users/login"){
-    //     return config
-    // }else{
+    if(config.url === "/users/login"){
+        return config
+    }else{
     //非登录请求都先拦截下来，将token携带到请求头里
         let token = localStorage.getItem("lol-token")
         config.headers["authorization"] = token;
         console.log(config.headers);
         return config //请求放行
         
-    // }
+    }
     
 })
 
@@ -53,11 +53,13 @@ axios.interceptors.request.use(config=>{
         let {code} =config.data
         console.log();
         if(code ===  "1004" || code === "10022"){
+            // 清除token
+            localStorage.removeItem("lol-token")
             // 跳转到登录页
             ElementUI.Message.error("登陆过期请重新登录")//弹出消息提示
             router.push("/login")
         }
-        console.log(config);
+        // console.log(config);
         return config;
     })
 

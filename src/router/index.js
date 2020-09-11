@@ -1,73 +1,27 @@
+//解决路由导航到统一路径重复报错的问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../pages/Home";
+// import DynamicRouters from "./DynamicRouters";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-    children:[
-      {
-        path:"Welcome",
-        name:"Welcome",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"welcome" */ "../pages/Home/Welcome")
-      },
-      {
-        path:"StudentDormitory",
-        name:"StudentDormitory",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"studentManager/studentDormitory" */ "../pages/Home/StudentManager/StudentDormitory")
-      },
-      {
-        path:"StudentItem",
-        name:"StudentItem",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"studentManager/studentItem" */ "../pages/Home/StudentManager/StudentItem")
-      },
-      {
-        path:"StudentInformation",
-        name:"StudentInformation",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"studentManager/studentInformation" */ "../pages/Home/StudentManager/StudentInformation")
-      },
-      {
-        path:"Attendance",
-        name:"Attendance",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"attendance" */ "../pages/Home/Attendance")
-      },
-      {
-        path:"Users",
-        name:"Users",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"users" */ "../pages/Home/Users")
-      },
-      {
-        path:"Mine",
-        name:"Mine",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"mine" */ "../pages/Home/Mine")
-      },
-      {
-        path:"Statistics",
-        name:"Statistics",
-        //懒加载方式：
-        component:()=>import(/* webpackChunkName:"statistics" */ "../pages/Home/Statistics")
-      },
-    ]
-  },
-  {
+  {//登录路由配置
     path: "/login",
     name: "login",
     //懒加载的方式
-    component: () =>
-      import(/* webpackChunkName: "login" */ "../pages/Login")
+    component: () =>import(/* webpackChunkName: "login" */ "../pages/Login")
   }
-];
+]
+
+
+// console.log(routes);
 
 const router = new VueRouter({
   routes

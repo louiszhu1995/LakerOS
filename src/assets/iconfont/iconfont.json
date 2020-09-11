@@ -1,0 +1,114 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2907166",
+      "name": "考勤",
+      "font_class": "kaoqin",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "3652590",
+      "name": "用户中心",
+      "font_class": "yonghuzhongxin",
+      "unicode": "e503",
+      "unicode_decimal": 58627
+    },
+    {
+      "icon_id": "3744057",
+      "name": "学校公寓",
+      "font_class": "xuexiao-",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "3762468",
+      "name": "个人信息-01-01",
+      "font_class": "gerenxinxi--",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "3833194",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "3927073",
+      "name": "二维码角标",
+      "font_class": "erweimajiaobiao",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "3965525",
+      "name": "Microsoft-Excel",
+      "font_class": "Microsoft-Excel",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "7872202",
+      "name": "个人中心",
+      "font_class": "gerenzhongxin",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "8286485",
+      "name": "扫码",
+      "font_class": "saoma",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "9438938",
+      "name": "扫码成功",
+      "font_class": "saomachenggong",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "10666917",
+      "name": "成功",
+      "font_class": "chenggong",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "10704952",
+      "name": "首页",
+      "font_class": "shouyex",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "14033446",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e753",
+      "unicode_decimal": 59219
+    },
+    {
+      "icon_id": "14197392",
+      "name": "学员档案-01",
+      "font_class": "xueyuandangan-01",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "14294791",
+      "name": "项目",
+      "font_class": "xiangmu",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    }
+  ]
+}
