@@ -13,7 +13,9 @@ import router from "../router"
 export default new Vuex.Store({
   state: {
     userInfo:JSON.parse( localStorage.getItem("userInfo") ),
-    sideMenu:[]
+    sideMenu:[],
+    // dialogVisible:false,//控制dialog弹出框显示或者隐藏
+    // dialog数据源
   },
   mutations: {
     // 设置userInfo对象
@@ -22,16 +24,22 @@ export default new Vuex.Store({
     },
     // 设置侧边菜单栏数据
     SET_SIDEMENU(state,payload){
-      console.log(payload);
+      // console.log(payload);
       state.sideMenu = payload
       // 找出DynamicRouters中路径是 "/"的对象 将用户路由添加给当前children
       let target =DynamicRouters.find(item=> item.path === "/")
       target.children = [...payload];
-      console.log(target);
+      // console.log(target);
       // 将路由配置 通过动态的方式加入到routers中，用addRoutes()
       // console.log(DynamicRouters);
       // console.log(router.addRoutes);
       router.addRoutes([...DynamicRouters])
+    },
+    CHANGE_DIALOG_VISIBLE(state){
+      state.dialogVisible = !state.dialogVisible
+    },
+    SET_STUFORM(state,payload){
+      state.stuForm = payload
     }
   },
   actions: {

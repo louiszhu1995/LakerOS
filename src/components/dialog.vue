@@ -47,8 +47,9 @@
   </el-dialog>
 </template>
 <script>
-  // import api from '@/api'
+  // 引入api/index.js里面的所有方法
   const api = require('@/api')
+  // 暴露出去
   export default {
     data() {
       return {
@@ -58,8 +59,9 @@
           editSuccessMsg: "增加成功",
           editerrorMsg: "增加失败"
         },
+        value:"",
         showAvatar: true,
-        dialogVisible: false,
+        dialogVisible:false,
         stuRules: {
           name: [
             { required: true, message: '请输入名字', trigger: 'blur' }
@@ -93,28 +95,29 @@
           degree: '',
           description: ''
         }
-      }
+      } 
     },
     mounted() {
-      //增加学员信息通过bus发送过来的事件
+//增加学员信息通过bus发送过来的事件
       this.$bus.$on('showDialog', () => {
-        this.dialogInfo.title = "增加学员信息"
-        this.dialogInfo.requestName = "addStuDetail"
-        this.dialogInfo.editSuccessMsg = "增加成功"
-        this.dialogInfo.editerrorMsg = "增加失败,缺少字段"
-        this.dialogVisible = true
+        this.dialogInfo.title = "增加学员信息";
+        this.dialogInfo.requestName = "addStuDetail";
+        this.dialogInfo.editSuccessMsg = "增加成功";
+        this.dialogInfo.editerrorMsg = "增加失败,缺少字段";
+        this.dialogVisible = true;
       })
-      //编辑学员信息发送过来的事件
+//编辑学员信息发送过来的事件
       this.$bus.$on('editStuEvent', (row) => {
         //1.弹出dialog
-        this.dialogVisible = true
+        this.dialogVisible = true;
         //2.数据回显
-        this.stuForm = { ...row }
+        console.log(row);
+        this.stuForm = { ...row };
         // 更改dialog的标题
-        this.dialogInfo.title = "编辑学员信息"
-        this.dialogInfo.requestName = "updateStu"
-        this.dialogInfo.editSuccessMsg = "修改成功"
-        this.dialogInfo.editerrorMsg = "修改失败"
+        this.dialogInfo.title = "编辑学员信息";
+        this.dialogInfo.requestName = "updateStu";
+        this.dialogInfo.editSuccessMsg = "修改成功";
+        this.dialogInfo.editerrorMsg = "修改失败";
         //3.更改提交
       })
     },
@@ -125,39 +128,37 @@
         console.log(r)
       },
       removeAvatar(r) {
+        // 移除头像，赋值为空
         this.stuForm.headimgurl = ''
       },
       confirmClick(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            // 本地表单校验通 将表单信息提交到后台
-            // 关闭 dialog
-            this.dialogVisible = false
-            //增加或者编辑
-            api[this.dialogInfo.requestName](this.stuForm)
-              .then(res => {
-                if (res.data && res.data.state) {
-                  // 提示添加成功 更新表格
-                  this.$message.success(this.dialogInfo.editSuccessMsg)
-                  this.$bus.$emit('updateStuTable')
-                  // 清空stuForm数据对象
-                  if (this.stuForm['_id']) delete this.stuForm['_id'];//清理_id字段 防止bug
-                  Object.keys(this.stuForm).forEach(key => this.stuForm[key] = '')
-                  this.$refs['uploadAvatar'].clearFiles() //清空上传文件
-                } else {
-                  this.$message.warning(this.dialogInfo.editerrorMsg)
-                }
-              }).catch(err => {
-                console.log(err)
-                this.$message.error('登入过期网络错误')
-              })
-
-            //编辑
-
-          } else {
-            this.$message.error('请将内容填写完整')
-          }
-        })
+          this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  // 本地表单校验通 将表单信息提交到后台
+                  // 关闭 dialog
+                this.dialogVisible = false
+                // 增加学员信息的逻辑
+                api[this.dialogInfo.requestName](this.stuForm)
+                    .then(res=>{
+                        if(res.data && res.data.state){
+                            // 提示添加成功 更新表格
+                            this.$message.success(this.dialogInfo.editSuccessMsg)
+                            this.$bus.$emit('updateStuTable')
+                            // 清空stuForm数据对象
+                            if(this.stuForm["_id"]){delete this.stuForm["_id"]}//清掉_id字段，防止出错
+                            Object.keys(this.stuForm).forEach(key=>this.stuForm[key]="");
+                            this.$refs["uploadAvatar"].clearFiles()//清空上传的文件
+                        }else{
+                          this.$message.warning(this.dialogInfo.editSuccessMsg)
+                        }
+                    })
+                    .catch(err=>{
+                          this.$message.error('登入过期网络错误')
+                    })
+              } else {
+                  this.$message.warning('请将内容填写完整')
+              }
+          })
       }
     }
   }

@@ -99,6 +99,7 @@
                 });
                 // 跳转到主页
                 this.$router.push("/")
+                window.location.reload()
                 loading.close()// 关闭动画
               }else{
                  this.$message.error('用户名或密码错误');

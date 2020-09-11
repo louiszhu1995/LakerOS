@@ -40,7 +40,6 @@ axios.interceptors.request.use(config=>{
         config.headers["authorization"] = token;
         console.log(config.headers);
         return config //请求放行
-        
     }
     
 })
@@ -51,7 +50,6 @@ axios.interceptors.request.use(config=>{
         // 1004表示校验失败
         // 10022表示登录状态失效
         let {code} =config.data
-        console.log();
         if(code ===  "1004" || code === "10022"){
             // 清除token
             localStorage.removeItem("lol-token")
