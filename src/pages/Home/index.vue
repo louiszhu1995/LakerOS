@@ -29,7 +29,7 @@
                   <el-avatar :size="40" fit="fit" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2818263918,1469537934&fm=26&gp=0.jpg"></el-avatar>
                 </div>
                 <div class="welcome"><span>欢迎您:</span></div>
-                <div class="signer"><span>{{$store.state.userInfo.nickname}}</span></div>
+                <div class="signer"><span @click="$router.push('/Mine')">{{$store.state.userInfo.nickname}}</span></div>
                 <div class="quit"><span @click="quit">退出</span></div>
               </div>
             </el-col>
@@ -37,6 +37,14 @@
         </el-header>
         <!-- 主体部分 -->
         <el-main>
+          <!-- 面包屑 -->
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item v-for="(item,index) in crumb" 
+                                :key="index"  
+                                :to="{ path: item.path || '/Welcome'}">
+                  {{item.meta.name ||"首页" }}
+            </el-breadcrumb-item>
+          </el-breadcrumb>
           <!--主页的路由页面  -->
           <router-view></router-view>
         </el-main>
@@ -45,12 +53,17 @@
   </div>
 </template>
 <script>
-import subMenu from "../../components/subMenu"
+import subMenu from "../../components/subMenu";
+import { mapState } from "vuex"
 export default {
       data(){
           return {
               isCollapse:false
           }
+      },
+      computed:{
+        // 映射
+        ...mapState(["sideMenu","crumb"])
       },
       components: {
         subMenu
@@ -98,7 +111,12 @@ export default {
     cursor: pointer;
     color:cyan;
   }
-  .signer{font-weight: bolder;color:tomato;}
+  .signer{
+    font-weight: bolder;
+    color:tomato;
+    cursor: pointer;
+    text-decoration: underline;
+  }
   .el-menu .el-menu-item{padding:0;}
   .el-menu-vertical-demo li{text-align: left;}
   /* 大体布局 */

@@ -21,7 +21,7 @@ const allRouters =[
     {
         path:"StudentManager",
         name:"StudentManager",
-        // redirect:"/StudentManager/StudentItem",
+        redirect:"/StudentManager/StudentItem",
         meta:{name:"学员管理",icon:"iconfont icon-wode"},
         component:()=>import(/* webpackChunkName:"studentManager" */ "../pages/Home/StudentManager"),
         children:[
@@ -40,7 +40,7 @@ const allRouters =[
             {
                 path:"StudentDormitory",
                 name:"StudentDormitory",
-                meta:{name:"学员宿舍",icon:"iconfont icon-xuexiao-",fullPath:"/StudentManager/StudentInformation"},
+                meta:{name:"学员宿舍",icon:"iconfont icon-xuexiao-",fullPath:"/StudentManager/StudentDormitory"},
                 component:()=>import(/* webpackChunkName:"studentDormitory" */ "../pages/Home/StudentManager/StudentDormitory")
             },
         ]
@@ -66,7 +66,7 @@ const allRouters =[
     {
         path:"Users",
         name:"Users",
-        meta:{name:"用户中心",icon:"iconfont icon-yonghuzhongxin",fullPath:"/Users"},
+        meta:{name:"用户管理",icon:"iconfont icon-yonghuzhongxin",fullPath:"/Users"},
         component:()=>import(/* webpackChunkName:"users" */ "../pages/Home/Users")
     }
 ]

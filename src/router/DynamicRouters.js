@@ -5,6 +5,7 @@ const DynamicRouters =[
     {
         path: "/",
         name: "Home",
+        redirect: "/Welcome",
         component: Home,
         children:[]
       },

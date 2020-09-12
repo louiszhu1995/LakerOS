@@ -13,7 +13,7 @@
                 </el-menu-item-group>
             </el-submenu>
             <!-- 常规菜单，如果存在拥有二级菜单的一级菜单，则下面不显示-->
-            <el-menu-item index="item.path" v-else  @click="jump(item.name)">
+            <el-menu-item :index="item.meta.fullPath" v-else  @click="jump(item.name)">
                 <i :class="item.meta.icon" style="margin-right:10px;font-size:20px"></i>
                 <span slot="title">{{item.meta.name}}</span>
             </el-menu-item>
