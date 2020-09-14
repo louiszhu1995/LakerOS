@@ -146,7 +146,6 @@ export default {
         degree: "",
         description: ""
       },
-      // classOptions: "",
       searchList: [],
       searchValue: "",
       blurSearchValue: "",
@@ -286,9 +285,6 @@ export default {
             this.$message.warning("搜索失败了");
           }
         })
-        // .catch(err => {
-        //   this.$message.error("搜索出错啦");
-        // });
     },
     // 班级选择框展开出发的逻辑
     classVisible(isVisible) {
@@ -362,5 +358,8 @@ export default {
 .exportExcel{
   line-height: 0;
   text-align: right;
+}
+.el-table--fit{
+     background: linear-gradient(135deg,#804cff61,#dfa335e0);
 }
 </style>

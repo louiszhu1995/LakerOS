@@ -3,7 +3,7 @@
     <div class="bg">
       <div class="left"></div>
       <div class="about">
-        <div class="h3">英雄管理系统</div>
+        <div class="h3">LAKER</div>
         <el-form
           :model="loginForm"
           status-icon
@@ -36,14 +36,14 @@
           </el-form-item>
         </el-form>
       </div>
-      <video
+      <!-- <video
         src="../../assets/images/bg_video.d2d602a9.mp4"
         muted="muted"
         autoplay="autoplay"
         loop="loop"
         preload="auto"
         class="video"
-      ></video>
+      ></video> -->
     </div>
   </div>
 </template>
@@ -102,7 +102,6 @@ export default {
           // 本地校验通过，发送登录进页面请求
           let { username, password } = this.loginForm;
           login({ username, password }).then(res => {
-            // console.log(res);
             if (res.data.state) {
               //请求成功了
               let { token } = res.data;
@@ -144,14 +143,15 @@ export default {
 .bg {
   width: 100%;
   height: 100%;
-  background-image: url("../../assets/images/bg.824f963d.jpg");
+  background:url("../../assets/images/lbj.jpg") no-repeat center;
+  background-size: cover;
   overflow: hidden;
   position: relative;
 }
 .left {
   width: 50%;
   height: 100%;
-  background-image: url("../../assets/images/bg2.fc58c850.png");
+  /* background-image: url("../../assets/images/bg2.fc58c850.png"); */
   background-repeat: no-repeat;
   background-size: 50%;
   opacity: 0.7;
@@ -173,7 +173,7 @@ export default {
 }
 .h3 {
   text-align: center;
-  color: white;
+  color:yellowgreen;
   font: 32px/100px "";
   font-weight: bold;
   padding-top: 80px;
@@ -187,10 +187,11 @@ export default {
 }
 .el-button--primary {
   width: 250px;
-  background: linear-gradient(90deg, #1596fb, #002dff);
+   background: linear-gradient(135deg,#f1e14e61,#8c10c5e0) !important;
 }
 .el-input__inner {
   background: transparent;
   color: white;
 }
 </style>
+

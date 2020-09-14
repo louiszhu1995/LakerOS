@@ -34,9 +34,6 @@ import {getLoginLog} from "@/api";
         margin-top: 20px;
         width: 100%;
         height: 100%;
-        /* background-image: ; */
-        /* background-size: 100%; */
-        /* background-repeat: no-repeat; */
     }
     main.el-main{
         line-height:0px;

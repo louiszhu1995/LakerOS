@@ -4,7 +4,7 @@
       <!--侧边菜单栏  -->
       <el-aside width="200">
         <!-- logo位置 -->
-        <h1 class="logo" style="height:60px;">logo</h1>
+        <div class="logo"></div>
         <el-menu  class="el-menu-vertical-demo"  
                   :collapse="isCollapse"
                   :default-active="$route.path"
@@ -17,16 +17,21 @@
       <el-container>
         <!-- 头部部分 -->
         <el-header>
-          <!-- 左侧部分 -->
-          <!-- 中间部分 -->
-          <!-- 右侧部分 -->
           <el-row type="flex" class="row-bg" justify="space-between">
-            <el-col :span="6"><div class="grid-content">左</div></el-col>
-            <el-col :span="6"><div class="grid-content">英雄管理系统</div></el-col>
+            <!-- 左侧部分 -->
+            <el-col :span="6">
+              <div class="grid-content shouqi">
+                <i :class="['iconfont',isCollapse?'icon-zhankai':'icon-shouqi']" 
+                    @click="isCollapse=!isCollapse"><span></span></i>
+              </div>
+            </el-col>
+            <!-- 中间部分 -->
+            <el-col :span="6"><div class="grid-content title">Show Time</div></el-col>
+            <!-- 右侧部分 -->
             <el-col :span="6">
               <div class="grid-content right">
                 <div class="header">
-                  <el-avatar :size="40" fit="fit" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2818263918,1469537934&fm=26&gp=0.jpg"></el-avatar>
+                  <el-avatar :size="40" fit="fill" :src="userInfo.headimgurl"></el-avatar>
                 </div>
                 <div class="welcome"><span>欢迎您:</span></div>
                 <div class="signer"><span @click="$router.push('/Mine')">{{$store.state.userInfo.nickname}}</span></div>
@@ -63,7 +68,7 @@ export default {
       },
       computed:{
         // 映射
-        ...mapState(["sideMenu","crumb"])
+        ...mapState(["sideMenu","crumb","userInfo"])
       },
       components: {
         subMenu
@@ -85,6 +90,33 @@ export default {
     min-height: 400px;
   }
   /* 头部样式 */
+    .shouqi {
+    padding-left: 10px;
+    text-align: left;
+    height: 30px;
+  }
+  .shouqi i {
+    display: block;
+    width: 30px;
+    height: 20px;
+    border-top:2px groove rgb(86, 11, 206);
+    border-bottom:2px groove rgb(221, 200, 12);
+    margin-top: 20px;
+  }
+  .shouqi i span{
+    display: block;
+    width: 30px;
+    height: 5px;
+    margin-top: 8px;
+    background-color: seagreen;
+  }
+  .icon-shouqi,
+  .icon-zhankai {
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+  }
+
   .el-col {
     border-radius: 4px;
     line-height: 60px;
@@ -94,6 +126,17 @@ export default {
   }
   .grid-content {
     border-radius: 4px;
+  }
+  .title{
+    font-weight: bolder;
+    font: 26px/60px "";
+    color:rgb(192, 35, 171);
+    margin-right:110px!important;
+  }
+ .logo {
+    height: 60px;
+    background: linear-gradient(135deg, #4c67ff, #5635df);
+    background: url("../../assets/images/laker.jpg") no-repeat 100%/100%,center  ;
   }
   /* 头部右边 */
   .right{
@@ -118,6 +161,7 @@ export default {
     text-decoration: underline;
   }
   .el-menu .el-menu-item{padding:0;}
+  .el-menu{  background: linear-gradient(135deg,#804cff61,#dfa335e0) !important;}
   .el-menu-vertical-demo li{text-align: left;}
   /* 大体布局 */
   .el-header {
@@ -125,11 +169,12 @@ export default {
     color: #333;
     text-align: center;
     height: 60px;
+    background: linear-gradient(135deg,#804cff61,#dfa335e0) !important;
   }
   .el-aside {
-    background-color: #D3DCE6;
     color: #333;
     text-align: center;
+    background: linear-gradient(135deg,#804cff61,#dfa335e0) !important;
   }
   .el-main {
     background-color: #E9EEF3;
@@ -137,6 +182,7 @@ export default {
     text-align: center;
     line-height: 160px;
     background-color:white;
+    background: linear-gradient(135deg,#804cff61,#dfa335e0) !important;
   }
   
   body > .el-container {
