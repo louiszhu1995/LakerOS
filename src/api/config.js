@@ -1,6 +1,7 @@
 // 配置axios
 import axios from "axios";
 import router from "../router/index.js";
+import nprogress from "nprogress";//引入nprogress
 // 引入element-ui
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -15,7 +16,7 @@ switch (env) {
     axios.defaults.baseURL = "/api";
     break;
   case "production":
-    axios.defaults.baseURL = "/http://chst.vip";
+    axios.defaults.baseURL = "/api";
     break;
   case "test":
     axios.defaults.baseURL = "xxxxx";
@@ -30,8 +31,9 @@ axios.create({
 // 请求拦截器
 // config就是被拦截器拦截掉的请求配置
 axios.interceptors.request.use(config => {
+  nprogress.start()//打开加载进度条
   // 登录是不需要拦截的
-  if (config.url === "/users/login") {
+  if (config.url === "/users/login" || config.url === "./users/regist") {
     return config;
   } else {
     //非登录请求都先拦截下来，将token携带到请求头里
@@ -44,6 +46,7 @@ axios.interceptors.request.use(config => {
 
 // 响应拦截器
 axios.interceptors.response.use(config => {
+  nprogress.done()
   // config是响应对象
   // 1004表示校验失败
   // 10022表示登录状态失效

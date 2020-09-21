@@ -13,6 +13,9 @@ import "./assets/styles/el-reset.css"; //用于重设element-ui样式
 import "./assets/iconfont/iconfont.css"; //引入iconfont
 Vue.use(ElementUI);
 
+// 引入nprogress
+import "nprogress/nprogress.css"
+
 // 引入鉴权方法
 import has from "./utils/has";
 Vue.prototype.$has = has;//将鉴权方法绑定到vue原型上，方便其他鉴权功能
@@ -44,7 +47,7 @@ router.beforeEach((to, from, next) => {
     let token = localStorage.getItem("lol-token");
     if (token) {
       // 用户需要进入页面
-      // 哦按段vuex中的sideMenu是否有值
+      // 判断vuex中的sideMenu是否有值
       if (!store.state.sideMenu.length) {
         store.dispatch("FETCH_MENULIST").then(() => {
           next({ path: to.path });

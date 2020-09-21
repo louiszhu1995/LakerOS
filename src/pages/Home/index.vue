@@ -31,7 +31,7 @@
             <el-col :span="6">
               <div class="grid-content right">
                 <div class="header">
-                  <el-avatar :size="40" fit="fill" :src="userInfo.headimgurl"></el-avatar>
+                  <el-avatar :size="40" fit="fill" src="../../assets/images/erwei.png"></el-avatar>
                 </div>
                 <div class="welcome"><span>欢迎您:</span></div>
                 <div class="signer"><span @click="$router.push('/Mine')">{{$store.state.userInfo.nickname}}</span></div>

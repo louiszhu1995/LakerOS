@@ -36,14 +36,6 @@
           </el-form-item>
         </el-form>
       </div>
-      <!-- <video
-        src="../../assets/images/bg_video.d2d602a9.mp4"
-        muted="muted"
-        autoplay="autoplay"
-        loop="loop"
-        preload="auto"
-        class="video"
-      ></video> -->
     </div>
   </div>
 </template>
